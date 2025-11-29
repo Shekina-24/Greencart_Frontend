@@ -1,4 +1,4 @@
-// File: C:\New\Greencart\Greencart\app\api\auth\login\route.js
+// File: C:\New\Greencart\Greencart\app\api\auth\login\route.ts
 import * as entry from '../../../../../../app/api/auth/login/route.js'
 import type { NextRequest } from 'next/server.js'
 
