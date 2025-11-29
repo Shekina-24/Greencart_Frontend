@@ -1,0 +1,410 @@
+﻿/* ================================
+   GreenCart - ThÃ¨me clair final corrigÃ©
+   ================================ */
+
+/* ---------- ThÃ¨mes et variables ---------- */
+:root{
+  --bg:#f6fbf7;
+  --panel:#ffffff;
+  --muted:#eef5ee;
+  --text:#0e1b14;
+  --sub:#5b6f64;
+  --brand:#2fb86a;
+  --brand-2:#6dde8a;
+  --accent:#ffb703;
+  --danger:#d62828;
+  --ok:#2a9d8f;
+  --line:#dbe7dd;
+  --shadow:0 8px 24px rgba(0,0,0,.08);
+  --radius:16px;
+}
+
+/* ---------- Base ---------- */
+html,body{
+  margin:0; padding:0;
+  background:linear-gradient(180deg,#f6fbf7,#f2f8f3 60%,#f6fbf7);
+  color:var(--text);
+  font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+img{max-width:100%; display:block}
+.container{width:min(1100px,92vw);margin-inline:auto}
+
+/* ---------- HEADER ---------- */
+/* --- HEADER (alignement strict sur 1 ligne) --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  transition: background .2s ease, box-shadow .2s ease;
+}
+
+.site-header.is-scrolled { background: rgba(255,255,255,.98); box-shadow: 0 6px 18px rgba(0,0,0,.05); }
+
+/* âœ… grille 3 colonnes: brand | nav | actions */
+.nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+/* gauche */
+.brand { display:flex; align-items:center; gap:8px; }
+.logo { width:42px; height:auto; object-fit:contain; }
+.brand-name { color:var(--text); font-weight:700; font-size:1.25rem; text-decoration:none; }
+
+/* centre */
+.navlinks{
+  display:flex;
+  justify-content:center;     /* centre vraiment le bloc */
+  align-items:center;
+  gap:16px;
+  flex-wrap:nowrap;           /* â›”ï¸ interdit de passer Ã  la ligne */
+  white-space:nowrap;         /* empÃªche le wrap mot par mot */
+  min-width:0;                /* autorise la contraction au centre */
+}
+.navlinks a{
+  color:var(--sub);
+  text-decoration:none;
+  padding:8px 10px;
+  border-radius:8px;
+  font-weight:500;
+}
+.navlinks a:hover{ background:var(--muted); color:var(--text); }
+
+/* droite */
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+#btn-cart{
+  display:flex; align-items:center; gap:6px;
+  padding:8px 12px; border-radius:10px;
+  background:#f9fdf9; border:1px solid var(--line);
+}
+#btn-cart:hover{ background:#edf8ed; }
+
+/* ðŸ“± mobile: on autorise le wrap en colonne */
+@media (max-width: 900px){
+  .nav{
+    grid-template-columns: 1fr;
+    gap:12px;
+    padding:12px 0;
+  }
+  .navlinks{
+    justify-content:flex-start;
+    flex-wrap:wrap;           /* ok en mobile */
+    white-space:normal;
+    row-gap:8px;
+  }
+  .nav-actions{ gap:8px; }
+}
+
+
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* âœ… structure du header */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.logo {
+  width: 42px;
+  height: auto;
+  object-fit: contain;
+}
+.brand-name {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.navlinks a {
+  color: var(--sub);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.navlinks a:hover {
+  background: var(--muted);
+  color: var(--text);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+#btn-cart {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #f9fdf9;
+  border: 1px solid var(--line);
+}
+#btn-cart:hover {
+  background: #edf8ed;
+}
+
+/* âœ… Responsive */
+@media (max-width: 900px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+  }
+  .navlinks {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav-actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+}
+
+/* ---------- Boutons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--line); background:#fbfffb; color:var(--text);
+  padding:10px 14px; border-radius:12px; cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:transform .15s ease, background .15s ease;
+}
+.btn:hover{transform:translateY(-1px); background:#f7fcf7}
+.btn:disabled{opacity:.6; cursor:not-allowed}
+.btn--primary{
+  background:linear-gradient(180deg,var(--brand-2),var(--brand));
+  border-color:#1f7e4b; color:#082412; font-weight:700;
+}
+.btn--ghost{background:transparent;border-color:var(--line)}
+.btn--danger{background:linear-gradient(180deg,#ff7b7b,var(--danger));border-color:#9a1f1f;color:#fff}
+
+/* ---------- Ã‰lÃ©ments utilitaires ---------- */
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#f0faf3;border:1px solid var(--line);
+  border-radius:999px;padding:6px 10px;color:#246a40
+}
+.muted{color:var(--sub)}
+.hidden{display:none !important}
+
+/* ---------- Sections ---------- */
+main{display:grid;gap:48px;padding:28px 0 64px}
+.section{display:grid;gap:16px}
+.section h2{font-size:clamp(22px,2.6vw,30px);margin:0}
+
+/* ---------- HERO ---------- */
+.hero{
+  position: relative;
+  background: url('../img/hero.jpg') center/cover no-repeat;
+  color: var(--text);
+  border-radius: var(--radius);
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background: rgba(255,255,255,0.25);
+}
+.hero-overlay{
+  position: relative;
+  background: rgba(255,255,255,0.95);
+  border-radius: var(--radius);
+  padding: 32px;
+  width: min(800px,90%);
+  box-shadow: var(--shadow);
+}
+.hero h1{
+  font-size: clamp(28px,3.6vw,44px);
+  line-height: 1.15;
+  margin: 0;
+}
+.hero p{margin:0;color:var(--sub)}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+
+/* ---------- KPI ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.kpi strong{font-size:22px;display:block;color:var(--brand)}
+.kpi span{color:var(--sub);font-size:13px}
+
+/* ---------- Grilles & Cartes ---------- */
+.grid{display:grid;gap:14px}
+.cards-3{grid-template-columns:repeat(3,1fr)}
+.cards-2{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;padding:16px;
+  box-shadow:var(--shadow);
+  transition:.15s ease;
+}
+.card:hover{transform:translateY(-2px)}
+
+/* ---------- Produits ---------- */
+.product{display:grid;gap:10px}
+.product img{width:100%;height:160px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#f5faf5}
+.product .meta{display:flex;justify-content:space-between;align-items:center}
+.chip{font-size:12px;color:#073d21;background:var(--brand-2);padding:4px 8px;border-radius:999px}
+
+/* ---------- Filtres ---------- */
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.select,.input,textarea.input{
+  appearance:none;
+  background:#fbfffb;
+  border:1px solid var(--line);
+  color:var(--text);
+  border-radius:10px;
+  padding:10px 12px;
+  font-family:inherit;
+}
+.input::placeholder{color:color-mix(in oklab, var(--sub) 60%, white)}
+textarea.input{resize:vertical}
+
+/* ---------- BanniÃ¨re & Colonnes ---------- */
+.banner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;background:#eff8f1;border:1px solid var(--line);
+  padding:16px;border-radius:14px
+}
+.cols{display:grid;gap:14px;grid-template-columns:1.3fr .7fr}
+
+/* ---------- Tableau ---------- */
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{border-bottom:1px solid var(--line);padding:10px;text-align:left}
+
+/* ---------- Modals ---------- */
+.modal{
+  position:fixed;inset:0;display:none;
+  place-items:center;background:rgba(0,0,0,.35);
+  backdrop-filter: blur(6px)
+}
+.modal__panel{
+  width:min(520px,92vw);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;padding:18px;
+  box-shadow:var(--shadow)
+}
+.modal__header{display:flex;justify-content:space-between;align-items:center}
+
+/* ---------- Footer ---------- */
+.site-footer{
+  border-top:1px solid var(--line);
+  color:var(--sub);
+  padding:32px 0;margin-top:10px
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:18px
+}
+.footer-grid a{color:var(--sub);text-decoration:none}
+.footer-grid a:hover{color:#0f4f2f}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .cards-3{grid-template-columns:1fr}
+  .cards-2{grid-template-columns:1fr}
+  .cols{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .banner{flex-direction:column;align-items:flex-start}
+}
+/* Container un peu plus large pour Ã©viter les retours Ã  la ligne */
+.container{width:min(1240px,92vw);margin-inline:auto}
+
+/* HEADER alignÃ© sur une seule ligne */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.9);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  transition:background .2s ease, box-shadow .2s ease;
+}
+.site-header.is-scrolled{background:rgba(255,255,255,.98);box-shadow:0 6px 18px rgba(0,0,0,.05)}
+
+/* Grille 3 colonnes : brand | nav | actions */
+.nav{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:16px;
+  padding:10px 0;
+}
+
+/* Marque */
+.brand{display:flex;align-items:center;gap:8px}
+.logo{width:42px;height:auto;object-fit:contain}
+.brand-name{color:var(--text);font-weight:700;font-size:1.25rem;text-decoration:none}
+
+/* Nav centrale (NE DOIT PAS WRAP) */
+.navlinks{
+  display:flex;align-items:center;justify-content:center;
+  gap:14px;                 /* rÃ©duit lâ€™Ã©cart pour gagner de la place */
+  flex-wrap:nowrap;         /* interdit le retour Ã  la ligne */
+  white-space:nowrap;       /* garde chaque libellÃ© sur une ligne */
+  min-width:0;              /* autorise la colonne Ã  se compresser */
+  overflow:hidden;          /* Ã©vite la poussÃ©e qui casse la grille */
+}
+.navlinks a{
+  color:var(--sub);text-decoration:none;
+  padding:8px 10px;border-radius:8px;
+  font-weight:500;font-size:1.05rem;
+}
+.navlinks a:hover{background:var(--muted);color:var(--text)}
+
+/* Actions Ã  droite */
+.nav-actions{display:flex;align-items:center;gap:12px}
+#btn-cart{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 12px;border-radius:10px;
+  background:#f9fdf9;border:1px solid var(--line)
+}
+#btn-cart:hover{background:#edf8ed}
+
+/* Mobile : on autorise le wrap */
+@media (max-width:900px){
+  .nav{grid-template-columns:1fr;gap:12px;padding:12px 0}
+  .navlinks{justify-content:flex-start;flex-wrap:wrap;white-space:normal;row-gap:8px}
+  .nav-actions{gap:8px}
+}

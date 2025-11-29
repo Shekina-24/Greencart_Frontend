@@ -1,0 +1,1 @@
+{"kind":"FETCH","data":{"headers":{"content-length":"44","content-type":"application/json","date":"Sat, 29 Nov 2025 00:58:49 GMT","server":"uvicorn"},"body":"eyJpdGVtcyI6W10sInRvdGFsIjowLCJsaW1pdCI6NTAsIm9mZnNldCI6MH0=","status":200,"url":"http://localhost:8000/api/v1/reviews/product/3?limit=50&offset=0"},"revalidate":300,"tags":[]}

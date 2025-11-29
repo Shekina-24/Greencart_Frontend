@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GreenCart | Anti-gaspi, local & bas carbone</title>
+  <meta name="description" content="GreenCart — Marketplace anti-gaspi : produits locaux, économies et impact CO₂ mesuré." />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="./assets/css/style.css?v=16" />
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container nav">
+      <!-- Colonne gauche : marque -->
+      <div class="brand">
+        <img src="./assets/img/logo.png" alt="Logo GreenCart" class="logo" />
+        <a href="#" class="brand-name">GreenCart</a>
+      </div>
+
+      <!-- Colonne centre : navigation -->
+      <nav class="navlinks" role="navigation" aria-label="Navigation principale">
+        <a href="#produits">Produits</a>
+        <a href="#valeurs">Nos atouts</a>
+        <a href="#catalogue">Catalogue</a>
+        <a href="#dashboard">Mon impact</a>
+        <a href="#producteurs">Producteurs</a>
+      </nav>
+
+      <!-- Colonne droite : actions -->
+      <div class="nav-actions">
+        <button class="btn" id="btn-cart">🛒 Mon panier (<span id="cart-count">0</span>)</button>
+        <button class="btn btn--ghost" id="btn-login">Se connecter</button>
+        <button class="btn btn--primary" id="btn-register">Créer un compte</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-overlay">
+        <div class="badge">🌍 Anti-gaspi • Local • Bas carbone</div>
+        <h1 id="hero-title">
+          La marketplace qui transforme les surplus en économies — pour vous et pour la planète.
+        </h1>
+        <p>
+          GreenCart connecte consommateurs et producteurs locaux pour écouler les invendus, réduire le CO₂, et payer moins cher. Suivez votre impact en temps réel.
+        </p>
+        <div class="cta">
+          <button class="btn btn--primary" onclick="scrollToId('catalogue')">Découvrir le catalogue</button>
+          <button class="btn" onclick="scrollToId('valeurs')">Voir nos atouts</button>
+        </div>
+        <div class="kpis" aria-label="Chiffres clés">
+          <div class="kpi"><strong id="kpi-co2">0</strong><span>kg CO₂ évités</span></div>
+          <div class="kpi"><strong id="kpi-euros">0€</strong><span>d'économies réalisées</span></div>
+          <div class="kpi"><strong id="kpi-producteurs">0</strong><span>producteurs partenaires</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALEURS -->
+    <section id="valeurs" class="section">
+      <h2>Nos atouts différenciateurs</h2>
+      <div class="grid cards-3">
+        <article class="card">
+          <h3>Anti-gaspi, pour de vrai</h3>
+          <p class="muted">Nous priorisons les invendus / surplus certifiés par les producteurs, avec une traçabilité simple pour prouver l'impact.</p>
+        </article>
+        <article class="card">
+          <h3>Local & juste</h3>
+          <p class="muted">Cartographie par région et rémunération équitable des producteurs. Les frais sont transparents.</p>
+        </article>
+        <article class="card">
+          <h3>Empreinte CO₂ visible</h3>
+          <p class="muted">Chaque produit affiche une estimation de CO₂ évité si acheté en anti-gaspi plutôt qu'en circuit classique.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRODUITS EN AVANT -->
+    <section id="produits" class="section">
+      <div class="banner">
+        <div>
+          <h2>Anti-gaspi — Exemples du moment</h2>
+          <p class="muted">Données de démonstration pour la soutenance. Les prix et stocks sont simulés.</p>
+        </div>
+        <button class="btn" onclick="scrollToId('catalogue')">Parcourir tout le catalogue</button>
+      </div>
+      <div class="grid cards-3" id="featured"></div>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section id="catalogue" class="section">
+      <h2>Catalogue</h2>
+      <div class="filters" aria-label="Filtres de catalogue">
+        <select class="select" id="f-cat" aria-label="Catégorie">
+          <option value="">Catégorie — toutes</option>
+        </select>
+        <select class="select" id="f-region" aria-label="Région">
+          <option value="">Région — toutes</option>
+        </select>
+        <select class="select" id="f-dispo" aria-label="Disponibilité">
+          <option value="">Disponibilité</option>
+          <option value="surplus">Surplus</option>
+          <option value="normal">Normal</option>
+        </select>
+        <input class="input" id="f-q" placeholder="Rechercher… (ex: pommes)" />
+        <button class="btn" id="btn-reset">Réinitialiser</button>
+      </div>
+      <div class="grid cards-3" id="catalog-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- TABLEAU DE BORD -->
+    <section id="dashboard" class="section">
+      <h2>Mon impact (démo)</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>Résumé</h3>
+          <table class="table">
+            <tr><th>Commandes</th><td id="dash-orders">0</td></tr>
+            <tr><th>CO₂ évité</th><td id="dash-co2">0 kg</td></tr>
+            <tr><th>Économies</th><td id="dash-money">0 €</td></tr>
+          </table>
+          <p class="muted">Ces données sont des exemples pour la démo. Après connexion, elles seront alimentées par vos achats réels.</p>
+        </div>
+        <div class="card">
+          <h3>Badge anti-gaspi</h3>
+          <p class="muted">Débloquez un badge lorsque vous dépassez 25 kg de CO₂ évités.</p>
+          <div class="badge">🏅 Explorateur anti-gaspi</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTEURS -->
+    <section id="producteurs" class="section">
+      <h2>Espace Producteur</h2>
+      <div class="banner">
+        <div>
+          <p class="muted">Publiez vos lots en surplus en 2 minutes, fixez vos prix, recevez des commandes, suivez vos paiements.</p>
+        </div>
+        <div>
+          <button class="btn btn--primary" id="btn-pro">Devenir producteur</button>
+        </div>
+      </div>
+      <div class="grid cards-2">
+        <article class="card">
+          <h3>Mettre en ligne un lot</h3>
+          <p class="muted">Titre, quantité, DLC/qualité, région, photos. Prévisualisation en direct.</p>
+        </article>
+        <article class="card">
+          <h3>Outils de prévision (IA — démo)</h3>
+          <p class="muted">Anticipez vos surplus probables les 4 prochaines semaines, pour ajuster vos prix et éviter la perte.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== MODALES ===== -->
+
+  <!-- FICHE PRODUIT -->
+  <div class="modal" id="modal-product" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal__panel">
+      <header class="modal__header">
+        <h3 id="modal-title">Fiche produit</h3>
+        <button class="btn" onclick="closeModal('modal-product')">Fermer</button>
+      </header>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- PANIER (modale corrigée) -->
+  <div class="modal" id="modal-cart" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="modal__panel">
+      <header class="modal__header">
+        <h3 id="cart-title">Mon panier</h3>
+        <div style="display:flex; gap:8px; align-items:center">
+          <button class="btn btn--ghost" id="btn-empty-cart">Vider</button>
+          <button class="btn" onclick="closeModal('modal-cart')">Fermer</button>
+        </div>
+      </header>
+
+      <!-- Liste d’articles du panier (ID attendu par renderCart) -->
+      <div id="cart-items"></div>
+
+      <footer style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+        <strong>Total : <span id="cart-total">0,00 €</span></strong>
+        <button class="btn btn--primary" id="btn-checkout">Passer commande (démo)</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- MODALES Auth -->
+  <div class="modal" id="modal-login" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="modal__panel">
+      <header class="modal__header">
+        <h3 id="login-title">Se connecter</h3>
+        <button class="btn" onclick="closeModal('modal-login')">Fermer</button>
+      </header>
+      <form class="grid" onsubmit="fakeLogin(event)">
+        <input class="input" id="login-email" type="email" placeholder="Email" required />
+        <input class="input" id="login-pass" type="password" placeholder="Mot de passe" required />
+        <button class="btn btn--primary" type="submit">Connexion (démo)</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-register" role="dialog" aria-modal="true" aria-labelledby="register-title">
+    <div class="modal__panel">
+      <header class="modal__header">
+        <h3 id="register-title">Créer un compte</h3>
+        <button class="btn" onclick="closeModal('modal-register')">Fermer</button>
+      </header>
+      <form class="grid" onsubmit="fakeRegister(event)">
+        <input class="input" id="reg-name" placeholder="Nom complet" required />
+        <input class="input" id="reg-email" type="email" placeholder="Email" required />
+        <input class="input" id="reg-pass" type="password" placeholder="Mot de passe" required />
+        <button class="btn btn--primary" type="submit">Créer (démo)</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <section aria-label="À propos">
+        <div class="brand" style="margin-bottom:10px">
+          <img src="./assets/img/logo.png" alt="Logo GreenCart" class="logo" />
+          <strong>GreenCart</strong>
+        </div>
+        <p class="muted">Réduire le gaspillage, valoriser le local, afficher l'impact.</p>
+        <ul class="socials" aria-label="Réseaux sociaux" style="display:flex;gap:10px;list-style:none;padding:0;margin:10px 0 0">
+          <li><a href="#" aria-label="X">X</a></li>
+          <li><a href="#" aria-label="Instagram">Instagram</a></li>
+          <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+        </ul>
+      </section>
+
+      <section aria-label="Pages">
+        <strong>Pages</strong>
+        <ul class="footer-links">
+          <li><a href="#valeurs">Nos atouts</a></li>
+          <li><a href="#catalogue">Catalogue</a></li>
+          <li><a href="#dashboard">Mon impact</a></li>
+          <li><a href="#producteurs">Producteurs</a></li>
+        </ul>
+      </section>
+
+      <section aria-label="Mentions légales">
+        <strong>Légal</strong>
+        <ul class="footer-links">
+          <li><a href="#" rel="nofollow">Mentions légales</a></li>
+          <li><a href="#" rel="nofollow">Conditions d’utilisation</a></li>
+          <li><a href="#" rel="nofollow">Politique de confidentialité</a></li>
+          <li><a href="#" rel="nofollow">Cookies</a></li>
+        </ul>
+      </section>
+
+      <section aria-label="Contact">
+        <strong>Contact</strong>
+        <address class="contact">
+          <a href="mailto:hello@greencart.local">hello@greencart.local</a><br/>
+          Île-de-France, France
+        </address>
+        <p class="muted">Support du lundi au vendredi — 9h-18h.</p>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <span>© <span id="year"></span> GreenCart. Tous droits réservés.</span>
+        <span class="muted">SIREN 000 000 000 — Démo.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="./assets/js/app.js?v=16"></script>
+  <script>
+    // Ouvrir la modale Panier au clic (aligne le JS avec la modale)
+    document.getElementById('btn-cart')?.addEventListener('click', () => {
+      if (typeof renderCart === 'function') renderCart();
+      const m = document.getElementById('modal-cart');
+      if (m) m.style.display = 'grid';
+    });
+
+    // Brancher les actions du panier
+    document.getElementById('btn-empty-cart')?.addEventListener('click', () => {
+      if (window.CART) { window.CART = []; }
+      if (typeof renderCart === 'function') renderCart();
+    });
+    document.getElementById('btn-checkout')?.addEventListener('click', () => {
+      if (typeof simulateCheckout === 'function') simulateCheckout();
+    });
+  </script>
+</body>
+</html>
