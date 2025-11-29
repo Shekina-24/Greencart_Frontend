@@ -19,6 +19,7 @@
     "swr": "^2.3.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.14.12",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",

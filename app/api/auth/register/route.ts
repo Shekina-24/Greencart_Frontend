@@ -72,8 +72,8 @@ export async function POST(req: NextRequest): Promise<Response> {
       role: newUser.role,
       consentNewsletter: newUser.consentNewsletter,
       consentAnalytics: newUser.consentAnalytics,
-      createdAt: newUser.createdAt,
-      updatedAt: newUser.updatedAt,
+      //createdAt: newUser.createdAt,
+      //updatedAt: newUser.updatedAt,
     };
 
     return new Response(JSON.stringify({ user: userSafe }), {
