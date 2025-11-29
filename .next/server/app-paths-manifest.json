@@ -1,9 +1,7 @@
 {
-  "/produits/[slug]/page": "app/produits/[slug]/page.js",
-  "/checkout/page": "app/checkout/page.js",
-  "/compte/commandes/page": "app/compte/commandes/page.js",
-  "/compte/avis/page": "app/compte/avis/page.js",
-  "/landing/page": "app/landing/page.js",
   "/page": "app/page.js",
-  "/producteurs/produits/page": "app/producteurs/produits/page.js"
+  "/checkout/page": "app/checkout/page.js",
+  "/api/auth/register/route": "app/api/auth/register/route.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/api/auth/me/route": "app/api/auth/me/route.js"
 }

@@ -1,10 +1,22 @@
 'use client';
-
+import { useEffect } from "react";
 import { useMemo, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { User } from "@/lib/types";
+
+
+interface CurrentUser {
+  _id: string;
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  region?: string;
+  role?: "consumer" | "producer" | string;
+  consentNewsletter?: boolean;
+  consentAnalytics?: boolean;
+}
 
 interface HeaderProps {
   cartCount: number;
@@ -96,8 +108,55 @@ export default function Header({
     setMenuOpen(false);
   };
 
-  return (
-    <header className={`site-header${isScrolled ? " is-scrolled" : ""}`}>
+  const handleLogout = async () => {
+  try {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  } catch (e) {
+    console.error("Erreur lors de l'appel logout", e);
+  } 
+};
+
+   const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
+
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    console.log("Aucun token trouvé");
+    return;
+  }
+  console.log("JWT_SECRET =", process.env.JWT_SECRET);
+
+  const fetchUser = async () => {
+    try {
+      const res = await fetch("/api/auth/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const text = await res.text();
+      console.log("Status /api/auth/me :", res.status, text);
+
+      if (!res.ok) {
+        // Token invalide, expiré, user introuvable, etc.
+        return;
+      }
+
+      const data = JSON.parse(text) as { user: CurrentUser };
+      setCurrentUser(data.user);
+      console.log("Utilisateur récupéré :", data.user);
+    } catch (error) {
+      console.error("Erreur récupération utilisateur :", error);
+    }
+  };
+
+  fetchUser();
+}, []);
+
+      return (
+         <header className={`site-header${isScrolled ? " is-scrolled" : ""}`}>
       <div className="container nav">
         <div className="brand">
           <Image src="/images/logo.png" alt="Logo GreenCart" className="logo" width={44} height={44} />
@@ -133,8 +192,21 @@ export default function Header({
               </Link>
             ))}
           </nav>
-
-          <div className="nav-actions">
+          {
+            currentUser? 
+              <div className="nav-actions">
+              <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "center", flexWrap: "wrap",margin:'auto' }}>
+                <button className="btn btn--ghost" type="button" onClick={() => { onOpenCart(); closeMenu(); }}>
+                Mon panier ({cartCount})
+               </button>
+                <p style={{color:'green',fontWeight:'bold'}}> {currentUser!.firstName} {currentUser!.lastName}</p>
+                <button onClick={handleLogout} className="btn btn--primary" type="button">
+                  Se deconnecter
+                </button>
+              </div>
+              </div>
+               : 
+              <div className="nav-actions">
             {(user?.role === "consumer" || !user) ? (
               <button className="btn btn--ghost" type="button" onClick={() => { onOpenCart(); closeMenu(); }}>
                 Mon panier ({cartCount})
@@ -163,8 +235,12 @@ export default function Header({
               </div>
             )}
           </div>
+          }
+
         </div>
       </div>
     </header>
-  );
+      );
+     
+  
 }

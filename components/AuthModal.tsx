@@ -60,28 +60,50 @@ export default function AuthModal({ mode, isOpen, onClose }: AuthModalProps) {
 
     try {
       if (mode === "login") {
-        const result = await login({ email, password });
-        if (!result.success) {
-          setError(result.error ?? "Connexion impossible. Merci de verifier vos identifiants.");
-          setIsSubmitting(false);
-          return;
-        }
+        const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.log(data.error || "Erreur de connexion");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      console.log("Connexion réussie !");
+      window.location.href = "/";
+
       } else {
-        const result = await register({
-          email,
-          password,
-          firstName: firstName || undefined,
-          lastName: lastName || undefined,
-          region: region || undefined,
-          role,
-          consentAnalytics,
-          consentNewsletter
+       console.log("Registering user:", formState);
+
+          const res = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            password,
+            firstName,
+            lastName,
+            region,
+            role,
+            consentNewsletter,
+            consentAnalytics
+          }),
         });
-        if (!result.success) {
-          setError(result.error ?? "Creation du compte impossible. Merci de reessayer.");
-          setIsSubmitting(false);
+
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data.error || "Erreur à l'inscription");
           return;
         }
+
+        console.log("Inscription réussie", data);
+        window.location.href = "/";
+
       }
       onClose();
     } finally {

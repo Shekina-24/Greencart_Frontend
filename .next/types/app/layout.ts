@@ -1,4 +1,4 @@
-// File: C:\Users\azang\OneDrive\Desktop\Shekina\Greencart\Greencart\app\layout.tsx
+// File: C:\New\Greencart\Greencart\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
