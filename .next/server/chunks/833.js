@@ -1,1 +1,0 @@
-"use strict";exports.id=833,exports.ids=[833],exports.modules={8833:(e,r,t)=>{t.r(r),t.d(r,{default:()=>s});let s=(0,t(8570).createProxy)(String.raw`C:\New\Greencart\Greencart\components\PurchaseTracker.tsx#default`)}};
